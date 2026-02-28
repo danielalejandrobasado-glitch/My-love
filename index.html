@@ -76,15 +76,15 @@
 
     /* ── Lyrics ── */
     .lyrics-box {
-      margin-top:28px; height:200px; overflow:hidden;
+      margin-top:28px; height:220px; overflow:hidden;
       position:relative; animation:fadeUp 0.8s 0.9s ease both;
     }
-    .lyrics-box::before,.lyrics-box::after { content:''; position:absolute; left:0; right:0; height:50px; z-index:2; pointer-events:none; }
-    .lyrics-box::before { top:0; background:linear-gradient(to bottom,rgba(42,26,34,1),transparent); }
-    .lyrics-box::after  { bottom:0; background:linear-gradient(to top,rgba(42,26,34,1),transparent); }
-    .lyrics-inner { transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); padding:70px 0; }
-    .lyric-line { text-align:center; padding:5px 12px; font-size:0.85rem; color:rgba(244,167,185,0.3); font-style:italic; line-height:1.7; transition:all 0.4s ease; border-radius:8px; }
-    .lyric-line.near  { color:rgba(244,167,185,0.55); font-size:0.9rem; }
+    .lyrics-box::before,.lyrics-box::after { content:''; position:absolute; left:0; right:0; height:75px; z-index:2; pointer-events:none; }
+    .lyrics-box::before { top:0; background:linear-gradient(to bottom,rgba(42,26,34,1) 40%,transparent); }
+    .lyrics-box::after  { bottom:0; background:linear-gradient(to top,rgba(42,26,34,1) 40%,transparent); }
+    .lyrics-inner { transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .lyric-line { text-align:center; padding:7px 12px; font-size:0.82rem; color:rgba(244,167,185,0.22); font-style:italic; line-height:1.6; transition:all 0.45s ease; border-radius:8px; }
+    .lyric-line.near  { color:rgba(244,167,185,0.5); font-size:0.88rem; }
     .lyric-line.active { color:var(--cream); font-size:1.05rem; font-style:normal; font-weight:bold; text-shadow:0 0 20px rgba(244,167,185,0.9),0 0 40px rgba(201,108,138,0.5); background:rgba(244,167,185,0.09); }
 
     .message { margin-top:24px; padding:18px 20px; background:rgba(244,167,185,0.08); border:1px solid rgba(244,167,185,0.15); border-radius:16px; text-align:center; font-style:italic; color:rgba(253,232,239,0.85); font-size:0.9rem; line-height:1.7; animation:fadeUp 0.8s 1s ease both; }
@@ -235,8 +235,8 @@
       lyricsInner.appendChild(div);
     });
     const lines = lyricsInner.querySelectorAll('.lyric-line');
-    const LINE_H = 47;
     let lastActive = -1;
+    const BOX_H = 220; // must match .lyrics-box height
 
     function updateLyrics(t) {
       let active = -1;
@@ -251,8 +251,12 @@
         else if (i === active-1 || i === active+1) el.classList.add('near');
       });
       if (active >= 0) {
-        const offset = Math.max(0, active * LINE_H - 75);
-        lyricsInner.style.transform = `translateY(${-offset}px)`;
+        // Center the active line inside the box
+        const activeLine = lines[active];
+        const lineTop    = activeLine.offsetTop;
+        const lineHeight = activeLine.offsetHeight;
+        const offset     = lineTop - (BOX_H / 2) + (lineHeight / 2);
+        lyricsInner.style.transform = `translateY(${-Math.max(0, offset)}px)`;
       }
     }
 
