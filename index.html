@@ -7,188 +7,98 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --rose: #f4a7b9;
-      --deep-rose: #c96c8a;
-      --cream: #fff7f9;
-      --mauve: #8b4c6b;
-      --dark: #2a1a22;
-      --gold: #e8c97a;
+      --rose: #f4a7b9; --deep-rose: #c96c8a;
+      --cream: #fff7f9; --mauve: #8b4c6b;
+      --dark: #2a1a22; --gold: #e8c97a;
     }
-
     body {
-      min-height: 100vh;
-      background: var(--dark);
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      font-family: 'Lora', serif;
-      overflow-x: hidden;
-      overflow-y: auto;
-      position: relative;
-      padding: 30px 0 60px;
+      min-height: 100vh; background: var(--dark);
+      display: flex; align-items: flex-start; justify-content: center;
+      font-family: 'Lora', serif; overflow-x: hidden; overflow-y: auto;
+      position: relative; padding: 30px 0 60px;
     }
-
     .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-    .star {
-      position: absolute; background: white; border-radius: 50%;
-      animation: twinkle var(--d) ease-in-out infinite alternate; opacity: 0;
-    }
-    @keyframes twinkle {
-      from { opacity: 0; transform: scale(0.8); }
-      to   { opacity: var(--o); transform: scale(1.2); }
-    }
-
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d) ease-in-out infinite alternate; opacity: 0; }
+    @keyframes twinkle { from { opacity:0; transform:scale(0.8); } to { opacity:var(--o); transform:scale(1.2); } }
     .hearts-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .heart-p {
-      position: absolute; font-size: var(--s); bottom: -60px; left: var(--x);
-      animation: floatUp var(--d) ease-in infinite; animation-delay: var(--delay); opacity: 0;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.3; }
-      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-    }
+    .heart-p { position: absolute; font-size: var(--s); bottom: -60px; left: var(--x); animation: floatUp var(--d) ease-in infinite; animation-delay: var(--delay); opacity: 0; }
+    @keyframes floatUp { 0%{transform:translateY(0) rotate(0deg);opacity:0;} 10%{opacity:0.6;} 90%{opacity:0.3;} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0;} }
 
     .card {
       position: relative; z-index: 10;
       background: linear-gradient(145deg, rgba(255,247,249,0.07) 0%, rgba(244,167,185,0.12) 100%);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(244,167,185,0.25);
-      border-radius: 32px; padding: 48px 40px;
-      max-width: 420px; width: 90%;
+      backdrop-filter: blur(20px); border: 1px solid rgba(244,167,185,0.25);
+      border-radius: 32px; padding: 48px 40px; max-width: 420px; width: 90%;
       box-shadow: 0 0 80px rgba(201,108,138,0.2), 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
       animation: cardIn 1s cubic-bezier(0.34,1.56,0.64,1) both;
     }
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(40px) scale(0.95); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
+    @keyframes cardIn { from{opacity:0;transform:translateY(40px) scale(0.95);} to{opacity:1;transform:translateY(0) scale(1);} }
 
-    .vinyl-wrap { display: flex; justify-content: center; margin-bottom: 32px; }
+    .vinyl-wrap { display:flex; justify-content:center; margin-bottom:32px; }
     .vinyl {
-      width: 160px; height: 160px; border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 50%, #1a0e14 0 18%, transparent 18%),
-        radial-gradient(circle at 50% 50%, #2a1a22 0 20%, transparent 20%),
-        repeating-radial-gradient(circle at 50% 50%, #1a0e14 0, #2a1a22 1px, #1a0e14 2px, #2a1a22 4px);
+      width:160px; height:160px; border-radius:50%;
+      background: radial-gradient(circle at 50% 50%, #1a0e14 0 18%, transparent 18%),
+                  radial-gradient(circle at 50% 50%, #2a1a22 0 20%, transparent 20%),
+                  repeating-radial-gradient(circle at 50% 50%, #1a0e14 0, #2a1a22 1px, #1a0e14 2px, #2a1a22 4px);
       box-shadow: 0 0 0 3px var(--deep-rose), 0 0 40px rgba(201,108,138,0.5), 0 10px 30px rgba(0,0,0,0.6);
       position: relative;
     }
-    .vinyl::before {
-      content: ''; position: absolute; inset: 50%; transform: translate(-50%,-50%);
-      width: 40px; height: 40px; border-radius: 50%;
-      background: radial-gradient(circle, var(--rose) 0%, var(--deep-rose) 60%, var(--mauve) 100%);
-      box-shadow: 0 0 15px rgba(244,167,185,0.8);
-    }
-    .vinyl::after {
-      content: ''; position: absolute; inset: 50%; transform: translate(-50%,-50%);
-      width: 10px; height: 10px; border-radius: 50%; background: var(--dark); z-index: 2;
-    }
+    .vinyl::before { content:''; position:absolute; inset:50%; transform:translate(-50%,-50%); width:40px; height:40px; border-radius:50%; background:radial-gradient(circle, var(--rose) 0%, var(--deep-rose) 60%, var(--mauve) 100%); box-shadow:0 0 15px rgba(244,167,185,0.8); }
+    .vinyl::after  { content:''; position:absolute; inset:50%; transform:translate(-50%,-50%); width:10px; height:10px; border-radius:50%; background:var(--dark); z-index:2; }
     .vinyl.spinning { animation: spin 3s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 
-    .song-info { text-align: center; margin-bottom: 28px; animation: fadeUp 0.8s 0.3s ease both; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .song-title {
-      font-family: 'Playfair Display', serif; font-size: 1.6rem;
-      color: var(--cream); font-style: italic; letter-spacing: 0.02em; line-height: 1.2;
-    }
-    .song-artist { font-size: 0.9rem; color: var(--rose); margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
-    .dedication { font-size: 0.85rem; color: rgba(244,167,185,0.7); margin-top: 10px; font-style: italic; }
+    .song-info { text-align:center; margin-bottom:28px; animation:fadeUp 0.8s 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(15px);} to{opacity:1;transform:translateY(0);} }
+    .song-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--cream); font-style:italic; letter-spacing:0.02em; line-height:1.2; }
+    .song-artist { font-size:0.9rem; color:var(--rose); margin-top:6px; letter-spacing:0.1em; text-transform:uppercase; }
+    .dedication { font-size:0.85rem; color:rgba(244,167,185,0.7); margin-top:10px; font-style:italic; }
 
-    .progress-wrap { margin-bottom: 20px; animation: fadeUp 0.8s 0.5s ease both; }
-    .progress-bar {
-      width: 100%; height: 4px; background: rgba(244,167,185,0.2);
-      border-radius: 2px; cursor: pointer; position: relative;
-    }
-    .progress-fill {
-      height: 100%; background: linear-gradient(90deg, var(--deep-rose), var(--gold));
-      border-radius: 2px; width: 0%; transition: width 0.1s linear; position: relative;
-    }
-    .progress-fill::after {
-      content: ''; position: absolute; right: -4px; top: -3px;
-      width: 10px; height: 10px; background: var(--cream); border-radius: 50%;
-      box-shadow: 0 0 8px var(--rose);
-    }
-    .time-row { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.75rem; color: rgba(244,167,185,0.6); }
+    .progress-wrap { margin-bottom:20px; animation:fadeUp 0.8s 0.5s ease both; }
+    .progress-bar { width:100%; height:4px; background:rgba(244,167,185,0.2); border-radius:2px; cursor:pointer; position:relative; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,var(--deep-rose),var(--gold)); border-radius:2px; width:0%; transition:width 0.1s linear; position:relative; }
+    .progress-fill::after { content:''; position:absolute; right:-4px; top:-3px; width:10px; height:10px; background:var(--cream); border-radius:50%; box-shadow:0 0 8px var(--rose); }
+    .time-row { display:flex; justify-content:space-between; margin-top:8px; font-size:0.75rem; color:rgba(244,167,185,0.6); }
 
-    .controls { display: flex; align-items: center; justify-content: center; gap: 20px; animation: fadeUp 0.8s 0.6s ease both; }
-    .btn {
-      background: none; border: none; cursor: pointer; color: var(--rose);
-      transition: all 0.2s ease; display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; padding: 8px;
-    }
-    .btn:hover { color: var(--cream); transform: scale(1.1); }
-    .btn-play {
-      width: 60px; height: 60px;
-      background: linear-gradient(135deg, var(--deep-rose), var(--mauve));
-      box-shadow: 0 0 20px rgba(201,108,138,0.5), 0 4px 15px rgba(0,0,0,0.3);
-    }
-    .btn-play:hover { transform: scale(1.08); box-shadow: 0 0 35px rgba(201,108,138,0.7), 0 4px 15px rgba(0,0,0,0.3); }
-    .btn-play svg { fill: white; }
-    .btn svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .controls { display:flex; align-items:center; justify-content:center; gap:20px; animation:fadeUp 0.8s 0.6s ease both; }
+    .btn { background:none; border:none; cursor:pointer; color:var(--rose); transition:all 0.2s ease; display:flex; align-items:center; justify-content:center; border-radius:50%; padding:8px; }
+    .btn:hover { color:var(--cream); transform:scale(1.1); }
+    .btn-play { width:60px; height:60px; background:linear-gradient(135deg,var(--deep-rose),var(--mauve)); box-shadow:0 0 20px rgba(201,108,138,0.5),0 4px 15px rgba(0,0,0,0.3); }
+    .btn-play:hover { transform:scale(1.08); box-shadow:0 0 35px rgba(201,108,138,0.7),0 4px 15px rgba(0,0,0,0.3); }
+    .btn-play svg { fill:white; }
+    .btn svg { fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
-    .volume-row { display: flex; align-items: center; gap: 10px; margin-top: 22px; animation: fadeUp 0.8s 0.7s ease both; }
-    .volume-row svg { fill: none; stroke: rgba(244,167,185,0.6); stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
-    input[type=range] { flex: 1; -webkit-appearance: none; height: 3px; background: rgba(244,167,185,0.2); border-radius: 2px; outline: none; cursor: pointer; }
-    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--rose); box-shadow: 0 0 8px rgba(244,167,185,0.6); }
+    .volume-row { display:flex; align-items:center; gap:10px; margin-top:22px; animation:fadeUp 0.8s 0.7s ease both; }
+    .volume-row svg { fill:none; stroke:rgba(244,167,185,0.6); stroke-width:2; stroke-linecap:round; flex-shrink:0; }
+    input[type=range] { flex:1; -webkit-appearance:none; height:3px; background:rgba(244,167,185,0.2); border-radius:2px; outline:none; cursor:pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:var(--rose); box-shadow:0 0 8px rgba(244,167,185,0.6); }
 
     /* ── Lyrics ── */
     .lyrics-box {
-      margin-top: 28px; max-height: 190px; overflow: hidden;
-      position: relative; animation: fadeUp 0.8s 0.9s ease both;
+      margin-top:28px; height:200px; overflow:hidden;
+      position:relative; animation:fadeUp 0.8s 0.9s ease both;
     }
-    .lyrics-box::before, .lyrics-box::after {
-      content: ''; position: absolute; left: 0; right: 0; height: 45px; z-index: 2; pointer-events: none;
-    }
-    .lyrics-box::before { top: 0; background: linear-gradient(to bottom, rgba(42,26,34,0.98), transparent); }
-    .lyrics-box::after  { bottom: 0; background: linear-gradient(to top, rgba(42,26,34,0.98), transparent); }
-    .lyrics-inner { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); padding: 55px 0; }
-    .lyric-line {
-      text-align: center; padding: 5px 12px;
-      font-size: 0.87rem; color: rgba(244,167,185,0.35);
-      font-style: italic; line-height: 1.6; transition: all 0.4s ease; border-radius: 8px;
-    }
-    .lyric-line.prev  { color: rgba(244,167,185,0.55); font-size: 0.92rem; }
-    .lyric-line.active {
-      color: var(--cream); font-size: 1.02rem; font-style: normal; font-weight: bold;
-      text-shadow: 0 0 20px rgba(244,167,185,0.9), 0 0 40px rgba(201,108,138,0.5);
-      background: rgba(244,167,185,0.08);
-    }
+    .lyrics-box::before,.lyrics-box::after { content:''; position:absolute; left:0; right:0; height:50px; z-index:2; pointer-events:none; }
+    .lyrics-box::before { top:0; background:linear-gradient(to bottom,rgba(42,26,34,1),transparent); }
+    .lyrics-box::after  { bottom:0; background:linear-gradient(to top,rgba(42,26,34,1),transparent); }
+    .lyrics-inner { transition:transform 0.45s cubic-bezier(0.4,0,0.2,1); padding:70px 0; }
+    .lyric-line { text-align:center; padding:5px 12px; font-size:0.85rem; color:rgba(244,167,185,0.3); font-style:italic; line-height:1.7; transition:all 0.4s ease; border-radius:8px; }
+    .lyric-line.near  { color:rgba(244,167,185,0.55); font-size:0.9rem; }
+    .lyric-line.active { color:var(--cream); font-size:1.05rem; font-style:normal; font-weight:bold; text-shadow:0 0 20px rgba(244,167,185,0.9),0 0 40px rgba(201,108,138,0.5); background:rgba(244,167,185,0.09); }
 
-    .message {
-      margin-top: 24px; padding: 18px 20px;
-      background: rgba(244,167,185,0.08); border: 1px solid rgba(244,167,185,0.15);
-      border-radius: 16px; text-align: center; font-style: italic;
-      color: rgba(253,232,239,0.85); font-size: 0.9rem; line-height: 1.7;
-      animation: fadeUp 0.8s 1s ease both;
-    }
+    .message { margin-top:24px; padding:18px 20px; background:rgba(244,167,185,0.08); border:1px solid rgba(244,167,185,0.15); border-radius:16px; text-align:center; font-style:italic; color:rgba(253,232,239,0.85); font-size:0.9rem; line-height:1.7; animation:fadeUp 0.8s 1s ease both; }
 
-    .floating-heart {
-      position: fixed; font-size: 1.5rem; pointer-events: none; z-index: 100;
-      animation: floatHeart 1.5s ease forwards;
-    }
-    @keyframes floatHeart {
-      0%   { opacity: 1; transform: translate(-50%, 0) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -120px) scale(0.5); }
-    }
+    .floating-heart { position:fixed; font-size:1.5rem; pointer-events:none; z-index:100; animation:floatHeart 1.5s ease forwards; }
+    @keyframes floatHeart { 0%{opacity:1;transform:translate(-50%,0) scale(1);} 100%{opacity:0;transform:translate(-50%,-120px) scale(0.5);} }
   </style>
 </head>
 <body>
-
   <div class="stars" id="stars"></div>
   <div class="hearts-bg" id="heartsBg"></div>
 
   <div class="card">
-    <div class="vinyl-wrap">
-      <div class="vinyl" id="vinyl"></div>
-    </div>
+    <div class="vinyl-wrap"><div class="vinyl" id="vinyl"></div></div>
 
     <div class="song-info">
       <div class="song-title">Propuesta Indecente</div>
@@ -200,53 +110,33 @@
       <div class="progress-bar" id="progressBar">
         <div class="progress-fill" id="progressFill"></div>
       </div>
-      <div class="time-row">
-        <span id="currentTime">0:00</span>
-        <span id="totalTime">0:00</span>
-      </div>
+      <div class="time-row"><span id="currentTime">0:00</span><span id="totalTime">0:00</span></div>
     </div>
 
     <div class="controls">
       <button class="btn" id="btnBack">
-        <svg width="22" height="22" viewBox="0 0 24 24">
-          <polyline points="1 4 1 10 7 10"/>
-          <path d="M3.51 15a9 9 0 1 0 .49-4"/>
-          <text x="7" y="16" style="font-size:7px;stroke:none;fill:currentColor;font-family:sans-serif;">10</text>
-        </svg>
+        <svg width="22" height="22" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4"/><text x="7" y="16" style="font-size:7px;stroke:none;fill:currentColor;font-family:sans-serif;">10</text></svg>
       </button>
       <button class="btn btn-play" id="btnPlay">
         <svg id="iconPlay"  width="26" height="26" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-        <svg id="iconPause" width="26" height="26" viewBox="0 0 24 24" style="display:none">
-          <rect x="6" y="4" width="4" height="16" rx="1"/>
-          <rect x="14" y="4" width="4" height="16" rx="1"/>
-        </svg>
+        <svg id="iconPause" width="26" height="26" viewBox="0 0 24 24" style="display:none"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
       </button>
       <button class="btn" id="btnFwd">
-        <svg width="22" height="22" viewBox="0 0 24 24">
-          <polyline points="23 4 23 10 17 10"/>
-          <path d="M20.49 15a9 9 0 1 1-.49-4"/>
-          <text x="7" y="16" style="font-size:7px;stroke:none;fill:currentColor;font-family:sans-serif;">10</text>
-        </svg>
+        <svg width="22" height="22" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4"/><text x="7" y="16" style="font-size:7px;stroke:none;fill:currentColor;font-family:sans-serif;">10</text></svg>
       </button>
     </div>
 
     <div class="volume-row">
       <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/></svg>
       <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" />
-      <svg width="18" height="18" viewBox="0 0 24 24">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
     </div>
 
     <div class="lyrics-box">
       <div class="lyrics-inner" id="lyricsInner"></div>
     </div>
 
-    <div class="message">
-      "De todas las chicas del mundo,<br>tú eres mi favorita. 💕"
-    </div>
+    <div class="message">"De todas las chicas del mundo,<br>tú eres mi favorita. 💕"</div>
   </div>
 
   <audio id="audio" preload="auto" crossorigin="anonymous">
@@ -257,153 +147,171 @@
     // Stars
     const starsEl = document.getElementById('stars');
     for (let i = 0; i < 120; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      const size = Math.random() * 2.5 + 0.5;
-      s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1).toFixed(1)}s;--o:${(Math.random()*0.7+0.3).toFixed(2)};animation-delay:${(Math.random()*4).toFixed(1)}s`;
+      const s = document.createElement('div'); s.className = 'star';
+      const sz = Math.random()*2.5+0.5;
+      s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1).toFixed(1)}s;--o:${(Math.random()*0.7+0.3).toFixed(2)};animation-delay:${(Math.random()*4).toFixed(1)}s`;
       starsEl.appendChild(s);
     }
-
-    // Hearts bg
     const heartsBg = document.getElementById('heartsBg');
-    const heartEmojis = ['💕','🌸','✨','💗','🌷','💖'];
-    for (let i = 0; i < 12; i++) {
-      const h = document.createElement('div');
-      h.className = 'heart-p';
-      h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
-      h.style.cssText = `--x:${Math.random()*100}%;--s:${(Math.random()*1.2+0.6).toFixed(1)}rem;--d:${(Math.random()*8+6).toFixed(1)}s;--delay:${(Math.random()*10).toFixed(1)}s`;
+    const HE = ['💕','🌸','✨','💗','🌷','💖'];
+    for (let i=0;i<12;i++){
+      const h=document.createElement('div'); h.className='heart-p';
+      h.textContent=HE[Math.floor(Math.random()*HE.length)];
+      h.style.cssText=`--x:${Math.random()*100}%;--s:${(Math.random()*1.2+0.6).toFixed(1)}rem;--d:${(Math.random()*8+6).toFixed(1)}s;--delay:${(Math.random()*10).toFixed(1)}s`;
       heartsBg.appendChild(h);
     }
 
-    // ── Letra sincronizada (segundos) ──
+    // Letra con tiempos reales (en segundos) sacados del LRC oficial
     const lyrics = [
-      { t: 0,   text: "🎵 Propuesta Indecente 🎵" },
-      { t: 17,  text: "Dime si fue casualidad" },
-      { t: 20,  text: "o fue obra del destino" },
-      { t: 24,  text: "que aquella noche yo te viera" },
-      { t: 27,  text: "y me volviera loco" },
-      { t: 31,  text: "De que tamaño es tu corazón" },
-      { t: 35,  text: "¿Cabe alguien más adentro?" },
-      { t: 38,  text: "Es que quiero que sepas que pienso en ti" },
-      { t: 43,  text: "todo el tiempo" },
-      { t: 47,  text: "Qué buena propuesta indecente" },
-      { t: 51,  text: "que me haces esta noche" },
-      { t: 55,  text: "Ese cuerpo, esa boca inocente" },
-      { t: 59,  text: "me tienen muy enfermo" },
-      { t: 63,  text: "Y si hay algo que quiero esta noche" },
-      { t: 67,  text: "eres tú, solamente tú" },
-      { t: 71,  text: "Que el mundo se detenga" },
-      { t: 75,  text: "que el tiempo no corra" },
-      { t: 79,  text: "que esta madrugada" },
-      { t: 82,  text: "sea solo para mí" },
-      { t: 86,  text: "Si te invito una copa" },
-      { t: 89,  text: "y tú aceptas" },
-      { t: 92,  text: "¿Sería un pecado?" },
-      { t: 95,  text: "Si te llevo a bailar" },
-      { t: 98,  text: "y nos acercamos" },
-      { t: 101, text: "¿Eso sería algo malo?" },
-      { t: 105, text: "¿Y si luego de tanto bailar" },
-      { t: 109, text: "te provoca quedarte?" },
-      { t: 113, text: "Sería una aventura esta noche" },
-      { t: 117, text: "y mañana olvidarte" },
-      { t: 121, text: "Qué buena propuesta indecente" },
-      { t: 125, text: "que me haces esta noche" },
-      { t: 129, text: "Ese cuerpo, esa boca inocente" },
-      { t: 133, text: "me tienen muy enfermo" },
-      { t: 137, text: "Y si hay algo que quiero esta noche" },
-      { t: 141, text: "eres tú, solamente tú..." },
-      { t: 148, text: "💕" },
+      { t: 3.79,  text: "Hola, me llaman Romeo" },
+      { t: 7.76,  text: "Es un placer conocerla" },
+      { t: 12.55, text: "Qué bien te ves" },
+      { t: 14.26, text: "Te adelanto, no me importa quién sea él" },
+      { t: 20.01, text: "Dígame usted" },
+      { t: 22.01, text: "Si ha hecho algo travieso alguna vez" },
+      { t: 27.76, text: "Una aventura es más divertida" },
+      { t: 31.01, text: "Si huele a peligro" },
+      { t: 34.78, text: "Si te invito a una copa" },
+      { t: 36.78, text: "Y me acerco a tu boca" },
+      { t: 38.51, text: "Si te robo un besito" },
+      { t: 40.51, text: "A ver, ¿te enojas conmigo?" },
+      { t: 42.75, text: "¿Qué dirías si esta noche" },
+      { t: 44.76, text: "Te seduzco en mi coche?" },
+      { t: 46.54, text: "Que se empañen los vidrios" },
+      { t: 49.01, text: "Y la regla es que goces" },
+      { t: 50.76, text: "Si te falto el respeto" },
+      { t: 52.51, text: "Y luego culpo al alcohol" },
+      { t: 54.51, text: "Si levanto tu falda" },
+      { t: 56.30, text: "¿Me darías el derecho" },
+      { t: 58.26, text: "A medir tu sensatez?" },
+      { t: 62.00, text: "Poner en juego tu cuerpo" },
+      { t: 65.50, text: "Si te parece prudente" },
+      { t: 69.00, text: "Esta propuesta indecente 🎵" },
+      { t: 76.00, text: "A ver, a ver..." },
+      { t: 79.00, text: "Permíteme apreciar tu desnudez" },
+      { t: 84.00, text: "Relájate" },
+      { t: 87.00, text: "Que este Martini calmará tu timidez" },
+      { t: 93.00, text: "Una aventura es más divertida" },
+      { t: 97.00, text: "Si huele a peligro" },
+      { t: 100.0, text: "Si te invito a una copa" },
+      { t: 102.0, text: "Y me acerco a tu boca" },
+      { t: 104.0, text: "Si te robo un besito" },
+      { t: 106.0, text: "A ver, ¿te enojas conmigo?" },
+      { t: 108.0, text: "¿Qué dirías si esta noche" },
+      { t: 110.0, text: "Te seduzco en mi coche?" },
+      { t: 112.0, text: "Que se empañen los vidrios" },
+      { t: 115.0, text: "Y la regla es que goces" },
+      { t: 117.0, text: "Si te falto el respeto" },
+      { t: 119.0, text: "Y luego culpo al alcohol" },
+      { t: 121.0, text: "Si levanto tu falda" },
+      { t: 123.0, text: "¿Me darías el derecho" },
+      { t: 125.0, text: "A medir tu sensatez?" },
+      { t: 129.0, text: "Poner en juego tu cuerpo" },
+      { t: 132.0, text: "Si te parece prudente" },
+      { t: 135.0, text: "Esta propuesta indecente 🎵" },
+      { t: 139.0, text: "I'm back..." },
+      { t: 147.0, text: "It feels good to be king" },
+      { t: 150.0, text: "Gostoso 🔥" },
+      { t: 161.0, text: "Hey, listen..." },
+      { t: 165.0, text: "I know what you like" },
+      { t: 168.0, text: "How about if you and I, me and you" },
+      { t: 171.0, text: "¿Bailamos bachata?" },
+      { t: 176.0, text: "Y luego you and I, me and you" },
+      { t: 179.0, text: "¿Terminamo' en la cama?" },
+      { t: 184.0, text: "¿Bailamos bachata?" },
+      { t: 189.0, text: "Ay bailamos bachata 💃" },
+      { t: 191.0, text: "Y luego you and I, me and you" },
+      { t: 194.0, text: "¿Terminamo' en la cama?" },
+      { t: 197.0, text: "You and I, me and you..." },
+      { t: 208.0, text: "Ay chi chi" },
+      { t: 211.0, text: "Llora guitarra, llora 🎸" },
+      { t: 220.0, text: "💕" },
     ];
 
     const lyricsInner = document.getElementById('lyricsInner');
-    lyrics.forEach((l, i) => {
+    lyrics.forEach(l => {
       const div = document.createElement('div');
-      div.className = 'lyric-line';
-      div.textContent = l.text;
+      div.className = 'lyric-line'; div.textContent = l.text;
       lyricsInner.appendChild(div);
     });
     const lines = lyricsInner.querySelectorAll('.lyric-line');
-    const LINE_H = 46;
+    const LINE_H = 47;
     let lastActive = -1;
 
     function updateLyrics(t) {
       let active = -1;
-      for (let i = lyrics.length - 1; i >= 0; i--) {
+      for (let i = lyrics.length-1; i >= 0; i--) {
         if (t >= lyrics[i].t) { active = i; break; }
       }
       if (active === lastActive) return;
       lastActive = active;
       lines.forEach((el, i) => {
-        el.classList.remove('active','prev');
-        if (i === active)     el.classList.add('active');
-        else if (i === active - 1) el.classList.add('prev');
+        el.classList.remove('active','near');
+        if (i === active) el.classList.add('active');
+        else if (i === active-1 || i === active+1) el.classList.add('near');
       });
       if (active >= 0) {
-        const offset = active * LINE_H - 75;
-        lyricsInner.style.transform = `translateY(${-Math.max(0,offset)}px)`;
+        const offset = Math.max(0, active * LINE_H - 75);
+        lyricsInner.style.transform = `translateY(${-offset}px)`;
       }
     }
 
     // Player
-    const audio       = document.getElementById('audio');
-    const vinyl       = document.getElementById('vinyl');
-    const btnPlay     = document.getElementById('btnPlay');
-    const iconPlay    = document.getElementById('iconPlay');
-    const iconPause   = document.getElementById('iconPause');
+    const audio = document.getElementById('audio');
+    const vinyl = document.getElementById('vinyl');
+    const btnPlay = document.getElementById('btnPlay');
+    const iconPlay = document.getElementById('iconPlay');
+    const iconPause = document.getElementById('iconPause');
     const progressFill = document.getElementById('progressFill');
-    const progressBar  = document.getElementById('progressBar');
+    const progressBar = document.getElementById('progressBar');
     const currentTimeEl = document.getElementById('currentTime');
-    const totalTimeEl   = document.getElementById('totalTime');
-    const volumeSlider  = document.getElementById('volumeSlider');
+    const totalTimeEl = document.getElementById('totalTime');
+    const volumeSlider = document.getElementById('volumeSlider');
     let isPlaying = false;
 
     const fmt = t => `${Math.floor(t/60)}:${Math.floor(t%60).toString().padStart(2,'0')}`;
-
     audio.volume = 0.8;
+
     audio.addEventListener('loadedmetadata', () => { totalTimeEl.textContent = fmt(audio.duration); });
     audio.addEventListener('timeupdate', () => {
       if (!audio.duration) return;
-      progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      progressFill.style.width = (audio.currentTime/audio.duration*100)+'%';
       currentTimeEl.textContent = fmt(audio.currentTime);
       updateLyrics(audio.currentTime);
     });
     audio.addEventListener('ended', () => {
-      isPlaying = false; vinyl.classList.remove('spinning');
-      iconPlay.style.display = ''; iconPause.style.display = 'none';
+      isPlaying=false; vinyl.classList.remove('spinning');
+      iconPlay.style.display=''; iconPause.style.display='none';
     });
 
     function spawnHeart() {
-      const h = document.createElement('div');
-      h.className = 'floating-heart';
-      h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
-      h.style.left = (20 + Math.random()*60) + '%';
-      h.style.bottom = '30%';
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 1500);
+      const h = document.createElement('div'); h.className='floating-heart';
+      h.textContent = HE[Math.floor(Math.random()*HE.length)];
+      h.style.left=(20+Math.random()*60)+'%'; h.style.bottom='30%';
+      document.body.appendChild(h); setTimeout(()=>h.remove(),1500);
     }
 
     btnPlay.addEventListener('click', () => {
       if (isPlaying) {
-        audio.pause(); isPlaying = false;
-        vinyl.classList.remove('spinning');
-        iconPlay.style.display = ''; iconPause.style.display = 'none';
+        audio.pause(); isPlaying=false; vinyl.classList.remove('spinning');
+        iconPlay.style.display=''; iconPause.style.display='none';
       } else {
-        audio.play().then(() => {
-          isPlaying = true; vinyl.classList.add('spinning');
-          iconPlay.style.display = 'none'; iconPause.style.display = '';
+        audio.play().then(()=>{
+          isPlaying=true; vinyl.classList.add('spinning');
+          iconPlay.style.display='none'; iconPause.style.display='';
           spawnHeart(); spawnHeart();
         }).catch(console.error);
       }
     });
 
-    document.getElementById('btnBack').addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
-    document.getElementById('btnFwd').addEventListener('click',  () => { audio.currentTime = Math.min(audio.duration||0, audio.currentTime + 10); });
+    document.getElementById('btnBack').addEventListener('click',()=>{ audio.currentTime=Math.max(0,audio.currentTime-10); });
+    document.getElementById('btnFwd').addEventListener('click',()=>{ audio.currentTime=Math.min(audio.duration||0,audio.currentTime+10); });
     progressBar.addEventListener('click', e => {
       if (!audio.duration) return;
       const r = progressBar.getBoundingClientRect();
-      audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+      audio.currentTime = ((e.clientX-r.left)/r.width)*audio.duration;
     });
-    volumeSlider.addEventListener('input', () => { audio.volume = volumeSlider.value; });
+    volumeSlider.addEventListener('input',()=>{ audio.volume=volumeSlider.value; });
   </script>
 </body>
 </html>
