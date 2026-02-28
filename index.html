@@ -229,11 +229,21 @@
     ];
 
     const lyricsInner = document.getElementById('lyricsInner');
+    // Padding top so first line can center
+    const padTop = document.createElement('div');
+    padTop.style.height = '110px';
+    lyricsInner.appendChild(padTop);
+
     lyrics.forEach(l => {
       const div = document.createElement('div');
       div.className = 'lyric-line'; div.textContent = l.text;
       lyricsInner.appendChild(div);
     });
+
+    // Padding bottom so last lines can center
+    const padBot = document.createElement('div');
+    padBot.style.height = '110px';
+    lyricsInner.appendChild(padBot);
     const lines = lyricsInner.querySelectorAll('.lyric-line');
     let lastActive = -1;
     const BOX_H = 220; // must match .lyrics-box height
@@ -256,7 +266,7 @@
         const lineTop    = activeLine.offsetTop;
         const lineHeight = activeLine.offsetHeight;
         const offset     = lineTop - (BOX_H / 2) + (lineHeight / 2);
-        lyricsInner.style.transform = `translateY(${-Math.max(0, offset)}px)`;
+        lyricsInner.style.transform = `translateY(${-offset}px)`;
       }
     }
 
